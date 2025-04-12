@@ -3,16 +3,16 @@ Rust utility using the material_colors crate to score colors of e.g., a wallpape
 Usage example: 
 ```bash
 #!/bin/bash
- set -euo pipefail
+set -euo pipefail
 
- if [ ! -d ~/Pictures/wallpapers/ ]; then
+if [ ! -d ~/Pictures/wallpapers/ ]; then
    wallpaper_path="$HOME/Pictures/default_wallpaper"
    echo "Required directory: $HOME/Pictures/wallpapers not found. Fallback to default wallpaper"
- else
+else
    wallpaper_path="$(fd . "$HOME/Pictures/wallpapers" -t f | shuf -n 1)"
- fi
+fi
 
- apply_hyprpaper() {
+apply_hyprpaper() {
 
    # Preload the wallpaper once, since it doesn't change per monitor
    hyprctl hyprpaper preload "$wallpaper_path"
@@ -21,37 +21,36 @@ Usage example:
    hyprctl monitors | rg 'Monitor' | awk '{print $2}' | while read -r monitor; do
    hyprctl hyprpaper wallpaper "$monitor, $wallpaper_path"
    done
- }
+}
 
- if [ "$(image-hct "$wallpaper_path" tone)" -gt 60 ]; then
+if [ "$(image-hct "$wallpaper_path" tone)" -gt 60 ]; then
    mode="light"
- else
+else
    mode="dark"
- fi
+fi
 
- if [ "$(image-hct "$wallpaper_path" chroma)" -lt 20 ]; then
+if [ "$(image-hct "$wallpaper_path" chroma)" -lt 20 ]; then
    scheme="scheme-neutral"
- else
+else
    scheme="scheme-vibrant"
- fi
+fi
 
- # Set Material colortheme
+# Set Material colortheme
 
- matugen -t "$scheme" -m "$mode" image "$wallpaper_path"
+matugen -t "$scheme" -m "$mode" image "$wallpaper_path"
 
- # unload previous wallpaper
+# unload previous wallpaper
 
- hyprctl hyprpaper unload all
+hyprctl hyprpaper unload all
 
- # Set the new wallpaper
+# Set the new wallpaper
 
- apply_hyprpaper
+apply_hyprpaper
 
- # Get wallpaper image name & send notification
+# Get wallpaper image name & send notification
 
- newwall=$(basename "$wallpaper_path")
- notify-send "Colors and Wallpaper updated" "with image $newwall" -i "$wallpaper_path"
-
+newwall=$(basename "$wallpaper_path")
+notify-send "Colors and Wallpaper updated" "with image $newwall" -i "$wallpaper_path"
 
 echo "DONE!"
 ```
