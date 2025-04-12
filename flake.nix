@@ -22,7 +22,7 @@
         perSystem = { system, config, ... }: let
           pkgs = mkPkgs system;
         in {
-          # Define your package
+
           packages.default = pkgs.rustPlatform.buildRustPackage {
             pname = "image-hct";
             version = "0.1.0";
