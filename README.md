@@ -51,7 +51,7 @@ Usage example:
 
  newwall=$(basename "$wallpaper_path")
  notify-send "Colors and Wallpaper updated" "with image $newwall" -i "$wallpaper_path"
+
+
+echo "DONE!"
 ```
-
-
-        echo "DONE!"
