@@ -1,5 +1,5 @@
 # image-hct: Material Color scoring utility
-Rust utility using the material_colors crate to score colors of e.g., a wallpaper and return the Hue, Chrome, and Tone of its highest scoring color. Used as in conjunction with [matugen](https://github.com/InioX/matugen) to set theme and scheme dynamically based on those HCT values. 
+Rust utility using the material_colors crate to score colors of e.g., a wallpaper and return the Hue, Chrome, and Tone of its highest scoring color. Used in conjunction with [matugen](https://github.com/InioX/matugen) to set theme and scheme dynamically based on those HCT values. 
 Usage example: 
 ```bash
 #!/bin/bash
